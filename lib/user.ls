@@ -1,4 +1,4 @@
-bcrypt = require \bcrypt
+bcrypt = require \bcryptjs
 mongoose = require \mongoose
 Schema = mongoose.Schema
 

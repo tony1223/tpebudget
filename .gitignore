@@ -5,3 +5,4 @@ app/assets/partials/app/*.html
 server/*.js
 lib/*.js
 *.swp
+.DS_Store

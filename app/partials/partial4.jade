@@ -1,7 +1,7 @@
 .treemap-root
   .btn-group(data-toggle="buttons-radio")
     a.btn.default.active Default
-    a.btn.bycat 政事別
+    //- a.btn.bycat 政事別
     a.btn.bytop 主管單位
   #bubble-circle-size.btn 圖例
   #bubble-info
@@ -19,9 +19,9 @@
             span#bubble-detail-amount-value ???
             span#bubble-detail-amount-quantifier
             span#bubble-detail-amount-unit 元
-            |(
-            span#bubble-detail-amount-change ???
-            |&nbsp;)
+            
+            span#bubble-detail-amount-change 
+            |&nbsp;
             br
             |( 即為
             span#bubble-detail-amount-alt ???
@@ -38,6 +38,10 @@
         include vote
       #bubble-info-right
   #bubble-chart
+  .special_thanks
+    span 特別感謝：台北市主計處、台北市資訊局、g0v 中央政府總預算案專案, fork by TonyQ
+    br 
+    small (本專案為資訊社群發起開放資料協作專案、並非臺北市政府官方專案，意見收集僅供台北北市府參考。)
   script
     test_bubble();
   svg

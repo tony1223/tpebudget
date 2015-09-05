@@ -1,10 +1,7 @@
-# twbudget
-### visualizing taiwan central government spending
-
-![twbudget](https://raw.github.com/g0v/twbudget/master/thumbnail.png "twbudget")
+# tpe-budget-2016
+### visualizing taipei 2016 spending
 
 ## Prerequisites
-
 
 ### Windows 7(32-bit):
 
@@ -28,6 +25,10 @@
 
 * `npm i` to install node packages
 
+* `num install -g brunch` to install brunch tool 
+
+Note: Have to use node 0.8 or before to prevent bcrypt issues (or use bcryptjs instead).
+
 ### Running the app during development
 
 * `brunch w &`
@@ -38,3 +39,7 @@ Then navigate your browser to [http://localhost:8000](http://localhost:8000)
 ## License
 
 MIT http://g0v.mit-license.org/
+
+## source
+
+Fork from https://github.com/g0v/twbudget

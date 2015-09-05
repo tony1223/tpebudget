@@ -75,7 +75,7 @@ class BubbleChart
       InfoPanel.setState 3
       d3.select '#bubble-info-right *' .remove!
       d3.select \#bubble-info-right .insert \fb:comments, \:first-child
-        .attr \href, \http://budget.g0v.tw/budget/ + d.id
+        .attr \href, \http:// + window.location.host + '/budget/' + d.id
         .attr \num-posts, \2
         .attr \width, \470
         .attr \class, \fb-comments
@@ -320,10 +320,10 @@ class BubbleChart
     $('#bubble-detail-amount-value').text(UnitMapper.convert data.value,void,false)
     $('#bubble-detail-amount-quantifier').text(UnitMapper.getQuantifier!)
     $('#bubble-detail-amount-unit').text(UnitMapper.getUnit!)
-    $('#bubble-detail-amount-change').text(change data.change)
+    # $('#bubble-detail-amount-change').text(change data.change)
     $('#bubble-detail-amount-alt').text UnitMapper.convert data.value,-1,true
-    $('#bubble-detail-link').attr \href, 'http://budget.g0v.tw/budget/'+data.data.code
-    $('#bubble-detail-link').text 'http://budget.g0v.tw/budget/'+data.data.code
+    $('#bubble-detail-link').attr \href, 'http://'+window.location.host+'/budget/'+data.data.code
+    $('#bubble-detail-link').text 'http://'+window.location.host+'/budget/'+data.data.code
     @tooltip.showTooltip content, d3.event if @mode!='default'
     @do_show_details data,(if element then @mode else 'default') if @do_show_details
     if !element then @tooltip.hideTooltip!

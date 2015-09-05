@@ -94,7 +94,7 @@
     @include \auth
     @include \opengraph
     @csv2012 = null
-    @loadCsv \app/assets/data/tw2012ap.csv, (hash) ~> 
+    @loadCsv \app/assets/data/tpe2015ap.csv, (hash) ~> 
       @csv2012 = hash
     getOpenGraph = (code) ~> @getOpenGraph @csv2012,code
     @get '/:what': sendFile \index.html

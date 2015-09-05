@@ -1,13 +1,13 @@
 ul.nav
-  li(ng-class="getClass('/view2')")
+  //- li(ng-class="getClass('/view2')")
     a(ng-href='/view2') 每日支出
-  li(ng-class="getClass('/view3')")
+  //- li(ng-class="getClass('/view3')")
     a(ng-href='/view3') 鳥瞰圖
   li(ng-class="getClass('/view4')")
     a(ng-href='/budget') 變化圖
-  li(ng-class="getClass('/debtclock')")
+  //- li(ng-class="getClass('/debtclock')")
     a(ng-href='/debtclock') 國債鐘
-  li.dropdown
+  li.dropdown 
     a.dropdown-toggle(id="dLabel",role="button",data-toggle="dropdown",data-target="#")
       單位換算
       b.caret
@@ -37,10 +37,29 @@ ul.nav
       .modal-footer
         button.btn(data-dismiss="modal",aria-hidden="true") 取消
         button.btn.btn-primary(ng-click="addunit()") 送出
+  li.dropdown 
+    a.dropdown-toggle(id="dLabel",role="button",data-toggle="dropdown",data-target="#")
+      相關資料
+      b.caret
+    ul.dropdown-menu(id="unit-selector",ng-controller="UnitMapper",role="menu",aria-labelledby="dLabel")
+      li
+        a(href="http://data.taipei/opendata/datalist/datasetMeta?oid=e4ecb918-67cf-4207-ae5c-1203fd106a6d",target='_blank')
+          | 北市府預算開放資料集
+        a(href="https://github.com/tony1223/tpe-2016-budget/",target='_blank')
+          | 資料集 CSV 轉換專案與資料檔
+        a(href="budget.g0v.tw",target='_blank')
+          | g0v 中央政府預算網站
+        a(href="https://github.com/tony1223/twbudget",target='_blank')
+          | 本網站專案
 
 ul.nav.pull-right
-  li(ng-class="getClass('/profile')")
-    a(ng-href='/profile') 我的帳號
+  //- li(ng-class="getClass('/profile')")
+  //-   a(ng-href='/profile') 我的帳號
+  li
+    a(href="https://github.com/g0v/twbudget",target="_blank")
+      | 引用自 
+      img(src="/img/logo.png",alt="Logo: G0V.tw")
+      | 中央政府總預算
   li
     a
-      .fb-like(data-send="false",data-href="https://facebook.com/g0v.tw",data-width="120",data-layout="button_count",data-show-faces="false",data-font="verdana")
+      .fb-like(data-send="false",data-href="https://www.facebook.com/pages/台北市政府資訊局/580695085402795",data-width="120",data-layout="button_count",data-show-faces="false",data-font="verdana")

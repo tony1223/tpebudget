@@ -1,5 +1,8 @@
 mapforyear = (year, cb) ->
-    json <- d3.csv "/data/tw#{year}ap.csv"
+    json <- d3.csv "/data/tpe#{year}ap.csv"
+    for key,value of json
+        value.amount = parseInt value.amount,10
+    console.log
     cb {[code, entry] for {code}:entry in json}
 
 dataforyear = (year, cb) ->
@@ -22,21 +25,15 @@ init_year_data = (cb) ->
     return cb by_year if by_year
 
     by_year := {}
-    by_year.2007 <- mapforyear 2007
-    by_year.2008 <- mapforyear 2008
-    by_year.2009 <- mapforyear 2009
-    by_year.2010 <- mapforyear 2010
-    by_year.2011 <- mapforyear 2011
-    by_year.2012 <- mapforyear 2012
-    by_year.2013 <- mapforyear 2013
-    by_year.2014 <- mapforyear 2014
+    by_year.2015 <- mapforyear 2015
 
     cb by_year
+
 
 bar_chart = (id,mode) ->
     by_year <- init_year_data!
 
-    data = [{year, amount: +((by_year[year] && by_year[year][id])?amount ? 0)} for year in [2007 to 2014]]
+    data = [{year, amount: +((by_year[year] && by_year[year][id])?amount ? 0)} for year in [2015 to 2015]]
     margin = {top: 10, right: 30, bottom: 20, left: 90}
     width = 360 - margin.left - margin.right
     height = 140 - margin.top - margin.bottom
@@ -92,9 +89,11 @@ test_bubble = ->
       ..start!
       ..display_group_all!
 
-  y2013 <- mapforyear 2013
-  y2014 <- mapforyear 2014
-  data = dataOverYears y2013, y2014
+  #y2013 <- mapforyear 2013
+  #y2014 <- mapforyear 2014
+  y2015 <- mapforyear 2015
+  y2014 <- mapforyear 2015
+  data = dataOverYears y2014, y2015
   data .= sort (a, b) -> b.amount - a.amount
   #data .= slice 0, 600
   render_vis data
