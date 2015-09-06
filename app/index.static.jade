@@ -4,18 +4,18 @@ html(lang='en',prefix="og: http://ogp.me/ns#")
     meta(charset='utf-8')
     meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
     meta(name='viewport', content='width=device-width')
-    meta(name='description', content='快來瞭解預算類型、內容！')
+    meta(name='description', content='快來瞭解台北市 2016 年預算類型、內容！')
     meta(name='author', content='')
     base(href="/")
 
     if locals.og_title!=undefined
       meta(property='og:type',content='website')
-      meta(property='og:image',content='http://g0v.tw/img/g0v.png')
+      meta(property='og:image',content='http://tpebudget.tonyq.org/img/ogimage.png')
       meta(property='og:description',content='#{locals.og_description}')
       title 台北市 2016 總預算 #{locals.og_title}
     else
       meta(property='og:type',content='website')
-      meta(property='og:image',content='http://g0v.tw/img/g0v.png')
+      meta(property='og:image',content='http://tpebudget.tonyq.org/img/ogimage.png')
       title 台北市 2016 總預算
 
     link(rel='stylesheet', href='/css/app.css')
