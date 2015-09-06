@@ -13,13 +13,16 @@ UnitMapper =
     des_unit ?= this.unit
     return this.table[des_unit][0]
 
+  _num: (val,divide,floats) ->
+    return parseInt(val/divide * Math.pow(10,2),10) / Math.pow(10,floats)
+
   convert: (value, des_unit, full_desc) ->
     if des_unit==-1 then des_unit=parseInt Math.random()*this.table.length
     des_unit ?= this.unit
     unitdata=this.table[des_unit]
     value=parseInt(10000*value/unitdata[2])/10000
-    value = if value>=1000000000000 then parseInt(value/1000000000000)+"兆"
-            else if value>=100000000 then parseInt(value/100000000)+"億"
+    value = if value>=1000000000000 then this._num(value,1000000000000,2)+"兆"
+            else if value>=100000000 then this._num(value,100000000,2)+"億"
             else if value>=10000 then parseInt(value/10000)+"萬"
             else if value>=1000 then parseInt(value/1000)+"千"
             else if value>=1 then parseInt(10*value)/10

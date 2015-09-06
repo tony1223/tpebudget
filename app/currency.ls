@@ -15,6 +15,9 @@ CurrencyData = [
   ["支","iPhone5",25900],
 ];
 
+_num = (val,divide,floats) ->
+  parseInt(val/divide * Math.pow(10,2),10) / Math.pow(10,floats)
+
 CurrencyConvert = (v, idx, full) ->
   idx ?= 0
   c = CurrencyData[idx]
@@ -25,6 +28,6 @@ CurrencyConvert = (v, idx, full) ->
   else if v >= 10000 and v < 100000000
     v = parseInt(v / 10000) + "萬"
   else if v >= 100000000 and v < 1000000000000
-    v = parseInt(v / 100000000) + "億"
-  else v = parseInt(v / 1000000000000) + "兆"  if v >= 1000000000000
+    v = _num(v,100000000,2)+"億"
+  else v = _num(v,1000000000000,2)+"兆" if v >= 1000000000000
   v + (if full then c[0] + c[1] else "")
