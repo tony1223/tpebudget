@@ -326,7 +326,8 @@ class BubbleChart
     # $('#bubble-detail-amount-change').text(change data.change)
     $('#bubble-detail-amount-alt').text UnitMapper.convert data.value,-1,true
     $('#bubble-detail-link').attr \href, 'http://'+window.location.host+'/budget/'+data.data.code
-    $('#bubble-detail-link').text 'http://'+window.location.host+'/budget/'+data.data.code
+    $('#bubble-detail-link').text "直接連結"
+    # $('#bubble-detail-link').text 'http://'+window.location.host+'/budget/'+data.data.code
     @tooltip.showTooltip content, d3.event if @mode!='default'
     @do_show_details data,(if element then @mode else 'default') if @do_show_details
     if !element then @tooltip.hideTooltip!
