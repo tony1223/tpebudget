@@ -314,7 +314,10 @@ class BubbleChart
     content += "<span class='name'>Amount:</span><span class='value'> $#{value data.value}</span><br/>"
     content += "<span class='name'>Dep:</span><span class='value'> #{data.data.depname}/ #{data.data.depcat} </span><br/>"
     content += "<span class='name'>change:</span><span class='change'> #{change data.change}</span>"
-    content += "<div id='bubble-detail-change-bar2'></div>"
+    # content += "<div id='bubble-detail-change-bar2'></div>"
+    comment = data.data.comment.replace(/[0-9]+\./gi, (str) -> return "<br />"+str )
+    comment = comment.replace(/\([0-9]+\)/gi, (str) -> return "<br />"+str )
+    $('#bubble-detail-change-text').html(comment);
     $('#bubble-detail-name').text(data.data.name)
     $('#bubble-detail-depname').text(data.data.depname+'/'+data.data.depcat)
     $('#bubble-detail-amount-value').text(UnitMapper.convert data.value,void,false)
