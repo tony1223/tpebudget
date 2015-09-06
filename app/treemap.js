@@ -52,15 +52,18 @@ function initTreeMap() {
 	  ["支","iPhone5",25900],
 	];
 
+	function _num(val,divide,floats){
+		return parseInt( (val/divide) * Math.pow(10,floats),10)/ Math.pow(10,floats);
+	};
     function CurrencyConvert(v,idx,full) {
       if(idx==undefined) idx = 0;
       var c = CurrencyData[idx];
       v = parseInt(10000*v/c[2])/10000;
       if(v>1 && v<1000) v=parseInt(10*v)/10;
       if(v>=1000 && v<10000) v=parseInt(v/1000)+"千";
-      else if(v>=10000 && v<100000000) v=parseInt(v/10000)+"萬";
-      else if(v>=100000000 && v<1000000000000) v=parseInt(v/100000000)+"億";
-      else if(v>=1000000000000) v=parseInt(v/1000000000000)+"兆";
+      else if(v>=10000 && v<100000000) v= parseInt(v/10000)+"萬";
+      else if(v>=100000000 && v<1000000000000) v=_num(v,100000000,2)+"億";
+      else if(v>=1000000000000) v=_num(v,1000000000000,2)+"兆";
       return v+(full?c[0]+c[1]:"");
     }
     var lastcell = null;
