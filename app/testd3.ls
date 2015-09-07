@@ -107,7 +107,7 @@ test_bubble = ->
         bar_chart data.id, mode
       ..start!
       # ..display_group_all
-    if window.location.href.endsWith("budget/")
+    if window.location.href.endsWith("org/") || window.location.href.endsWith("budget/") || window.location.href.endsWith("budget")
       chart.display_by_attr \topname
     else
       chart.display_group_all!
