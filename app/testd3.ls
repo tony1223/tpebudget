@@ -2,7 +2,15 @@ mapforyear = (year, cb) ->
     json <- d3.csv "/data/tpe#{year}ap.csv"
     for key,value of json
         value.amount = parseInt value.amount,10
-    console.log
+        if value.comment
+            value.comment_html = "<div style='font-size:18px;'>"+value.comment+"</div>"
+            value.comment_html = value.comment_html.replace(/[0-9]+\./gi, (str) -> return "<br /><br />"+str )
+            value.comment_html = value.comment_html.replace(/\([0-9]+\)/gi, (str) -> return "<br /><br />"+str )
+            value.comment_html = value.comment_html.replace(/增列/gi, (str) -> return "<span style='color:green;'>"+str+"</span>" )
+            value.comment_html = value.comment_html.replace(/減列/gi, (str) -> return "<span style='color:red;'>"+str+"</span>" )
+            value.comment_html = value.comment_html.replace(/[0-9,]+元/gi, 
+              (str) -> return " <b >" + str.substring(0,str.length-1)+" 元" + " (約"+ UnitMapper.convert(parseInt(str.replace(/[,元]/gi,""),10),void,false)+") </b> " )
+            value.comment_html = value.comment_html.replace(/上年度預算數/gi, (str) -> return "<b>"+str+"</b>" );
     cb {[code, entry] for {code}:entry in json}
 
 dataforyear = (year, cb) ->
@@ -18,6 +26,7 @@ dataOverYears = (y1,y2,data1, data2) ->
         entry.byYear = { }
         entry.byYear[y2] = +entry.amount;
         entry.byYear[y1] = +data1[code]?amount;
+        entry.last_year = +data1[code]?amount;
         entry.change = (entry.byYear[y2] - entry.byYear[y1]) / entry.byYear[y2] if entry.byYear[y2]
         entry.amount = 0 if entry.amount is \NaN
         entry
@@ -99,7 +108,7 @@ test_bubble = ->
   data .= sort (a, b) -> b.amount - a.amount
   #data .= slice 0, 600
   render_vis data
-  chart.display_by_attr \topname
+
   $('.btn.bycat')click -> chart.display_by_attr \cat
   $('.btn.bytop')click -> chart.display_by_attr \topname
   $('.btn.default')click -> chart.display_group_all!

@@ -79,12 +79,16 @@ class BubbleChart
         .attr \num-posts, \2
         .attr \width, \470
         .attr \class, \fb-comments
-      FB.XFBML.parse(document.getElementById("bubble-info-right"))
+
+      if window.FB
+        FB.XFBML.parse(document.getElementById("bubble-info-right"))
 
       @lockcell
         ..id = d.id
         ..node = d3.select node || d3.event.target
       @show_details d, i
+      if(window.history.pushState)
+        window.history.pushState(null,document.title,'http://'+window.location.host+'/budget/'+d.data.code);
       @lockcell.node
         .attr \fill, 'url(#MyGradient)'
         .attr \stroke, \#f00
@@ -138,7 +142,7 @@ class BubbleChart
           .attr \text-anchor \bottom
           .attr \text-anchor \left
           .attr \fill \#fff
-          .text CurrencyConvert(val) + (if i == 3 => '(2013預計舉債)' else '')
+          .text CurrencyConvert(val) 
     d3.select('#bubble-circle-size').on \mouseover (d,i) ~>
       @depict.transition().duration(750).style \opacity 0.7
       .style \display \block
@@ -311,22 +315,32 @@ class BubbleChart
     change = d3.format \+.2%
     if element then (d3.select element).attr 'stroke', 'black'
     content = "<span class='name'>名稱:</span><span class='value'> #{data.data.name} / #{data.id} </span><br/>"
-    content += "<span class='name'>金額:</span><span class='value'> $#{value data.value}</span><br/>"
+    content += "<span class='name'>本年度預算金額:</span>"+
+      "<span class='value'> #{UnitMapper.convert data.value,void,false}"+
+        " ($#{value data.value})</span><br/>"
+    content += "<span class='name'>上年度預算金額:</span>"+
+      "<span class='value'> #{UnitMapper.convert data.data.last_year,void,false}"+
+        " ($#{value data.data.last_year}) </span><br/>"
     content += "<span class='name'>主管單位:</span><span class='value'> #{data.data.depname}/ #{data.data.depcat} </span><br/>"
-    content += "<span class='name'>變更:</span><span class='change'> #{change data.change}</span>"
+    content += "<span class='name'>變更:</span><span class='change'> #{change data.change} (#{UnitMapper.convert (data.value - data.data.last_year),void,false})</span><br />"
+    content += "<span class='name'>變更細項說明(點擊圓圈可以看詳細說明):</span>"
+    content += "<div style='padding:5px;height:300px;border:1px solid black;border-radio:10px;' class='detail'>#{data.data.comment_html}</div>"
     # content += "<div id='bubble-detail-change-bar2'></div>"
-    comment = data.data.comment.replace(/[0-9]+\./gi, (str) -> return "<br />"+str )
-    comment = comment.replace(/\([0-9]+\)/gi, (str) -> return "<br />"+str )
-    $('#bubble-detail-change-text').html(comment);
+    $('#bubble-detail-change-text').html(data.data.comment_html); 
     $('#bubble-detail-name').text(data.data.name)
     $('#bubble-detail-depname').text(data.data.depname+'/'+data.data.depcat)
     $('#bubble-detail-amount-value').text(UnitMapper.convert data.value,void,false)
     $('#bubble-detail-amount-quantifier').text(UnitMapper.getQuantifier!)
     $('#bubble-detail-amount-unit').text(UnitMapper.getUnit!)
-    $('#bubble-detail-amount-change').text(change data.change)
+    $('#bubble-detail-amount-value_last').text("前一年度為 " + (UnitMapper.convert data.data.last_year,void,false))
+    $('#bubble-detail-amount-quantifier_last').text(UnitMapper.getQuantifier!)
+    $('#bubble-detail-amount-unit_last').text(UnitMapper.getUnit!)
+
+    $('#bubble-detail-amount-change').text("("+(change data.change)+" / "+ ((data.value - data.data.last_year) > 0 && "+" || "" )+(UnitMapper.convert (data.value - data.data.last_year),void,false) + ")")
     $('#bubble-detail-amount-alt').text UnitMapper.convert data.value,-1,true
-    $('#bubble-detail-link').attr \href, 'http://'+window.location.host+'/budget/'+data.data.code
-    $('#bubble-detail-link').text "直接連結"
+    # $('#bubble-detail-link').attr \href, 'http://'+window.location.host+'/budget/'+data.data.code
+    # $('#bubble-detail-link').text "直接連結"
+    
     # $('#bubble-detail-link').text 'http://'+window.location.host+'/budget/'+data.data.code
     @tooltip.showTooltip content, d3.event if @mode!='default'
     @do_show_details data,(if element then @mode else 'default') if @do_show_details

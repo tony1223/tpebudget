@@ -16,7 +16,15 @@ UnitMapper =
   _num: (val,divide,floats) ->
     return parseInt(val/divide * Math.pow(10,2),10) / Math.pow(10,floats)
 
-  convert: (value, des_unit, full_desc) ->
+  convert: (value2, des_unit, full_desc) ->
+    prefix = "";
+    if (value2 < 0) then
+      value = value2 * -1;
+      prefix = "-";
+    else
+      value = value2;
+    
+
     if des_unit==-1 then des_unit=parseInt Math.random()*this.table.length
     des_unit ?= this.unit
     unitdata=this.table[des_unit]
@@ -27,7 +35,7 @@ UnitMapper =
             else if value>=1000 then parseInt(value/1000)+"千"
             else if value>=1 then parseInt(10*value)/10
             else value
-    return value + if full_desc then unitdata[0]+unitdata[1] else ""
+    return prefix + value + if full_desc then unitdata[0]+unitdata[1] else ""
 
   onchange: (func) ->
     this.callbacks.push(func)
