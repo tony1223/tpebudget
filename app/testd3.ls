@@ -1,15 +1,23 @@
+
+refine_amount = (str) ->
+    amount = parseInt(str.replace(/[,元]/gi,""),10)
+    if amount > 1000000 
+        return " <b >" + str.substring(0,str.length-1)+" 元" + 
+            ( " (約"+ UnitMapper.convert(amount,void,false)+") </b> " )   
+    else
+        return " <b >" + str.substring(0,str.length-1)+" 元" 
+
 mapforyear = (year, cb) ->
     json <- d3.csv "/data/tpe#{year}ap.csv"
     for key,value of json
         value.amount = parseInt value.amount,10
         if value.comment
-            value.comment_html = "<div style='font-size:18px;'>"+value.comment+"</div>"
+            value.comment_html = "<div style='line-height:150%;font-size:18px;'>"+value.comment+"</div>"
             value.comment_html = value.comment_html.replace(/[0-9]+\./gi, (str) -> return "<br /><br />"+str )
             value.comment_html = value.comment_html.replace(/\([0-9]+\)/gi, (str) -> return "<br /><br />"+str )
             value.comment_html = value.comment_html.replace(/增列/gi, (str) -> return "<span style='color:green;'>"+str+"</span>" )
             value.comment_html = value.comment_html.replace(/減列/gi, (str) -> return "<span style='color:red;'>"+str+"</span>" )
-            value.comment_html = value.comment_html.replace(/[0-9,]+元/gi, 
-              (str) -> return " <b >" + str.substring(0,str.length-1)+" 元" + " (約"+ UnitMapper.convert(parseInt(str.replace(/[,元]/gi,""),10),void,false)+") </b> " )
+            value.comment_html = value.comment_html.replace(/[0-9,]+元/gi, refine_amount)
             value.comment_html = value.comment_html.replace(/上年度預算數/gi, (str) -> return "<b>"+str+"</b>" );
     cb {[code, entry] for {code}:entry in json}
 
@@ -98,7 +106,11 @@ test_bubble = ->
       ..do_show_details = (data, mode) ->
         bar_chart data.id, mode
       ..start!
-      ..display_group_all!
+      # ..display_group_all
+    if window.location.href.endsWith("budget/")
+      chart.display_by_attr \topname
+    else
+      chart.display_group_all!
 
   #y2013 <- mapforyear 2013
   #y2014 <- mapforyear 2014

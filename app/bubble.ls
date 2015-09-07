@@ -60,11 +60,12 @@ class BubbleChart
             | (== -1)   => ''       # XXX: match -1 does not work
             | otherwise => change it
     @locking = (d,i,node) ~>
+
       @lockcell.node
         .attr \fill ~> @fill_color it.change
         .attr \stroke, (d) ~> (d3.rgb @fill_color d.change).darker!
         .style \opacity,1.0 if @lockcell.node
-        
+
       if !d && window.history.pushState
         window.history.pushState(null,document.title,'http://'+window.location.host+'/budget/');        
 
@@ -75,13 +76,15 @@ class BubbleChart
         @lockcell
           ..id = null
           ..node = null
+        $('#bubble-info').removeClass("bubble-info-locking")
         return
+      $('#bubble-info').addClass("bubble-info-locking")
       InfoPanel.setState 3
       d3.select '#bubble-info-right *' .remove!
       d3.select \#bubble-info-right .insert \fb:comments, \:first-child
         .attr \href, \http:// + window.location.host + '/budget/' + d.id
         .attr \num-posts, \2
-        .attr \width, \470
+        .attr \width, \350
         .attr \class, \fb-comments
 
       if window.FB
