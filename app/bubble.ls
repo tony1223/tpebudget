@@ -310,10 +310,10 @@ class BubbleChart
     value = d3.format \,
     change = d3.format \+.2%
     if element then (d3.select element).attr 'stroke', 'black'
-    content = "<span class='name'>Title:</span><span class='value'> #{data.data.name} / #{data.id} </span><br/>"
-    content += "<span class='name'>Amount:</span><span class='value'> $#{value data.value}</span><br/>"
-    content += "<span class='name'>Dep:</span><span class='value'> #{data.data.depname}/ #{data.data.depcat} </span><br/>"
-    content += "<span class='name'>change:</span><span class='change'> #{change data.change}</span>"
+    content = "<span class='name'>名稱:</span><span class='value'> #{data.data.name} / #{data.id} </span><br/>"
+    content += "<span class='name'>金額:</span><span class='value'> $#{value data.value}</span><br/>"
+    content += "<span class='name'>主管單位:</span><span class='value'> #{data.data.depname}/ #{data.data.depcat} </span><br/>"
+    content += "<span class='name'>變更:</span><span class='change'> #{change data.change}</span>"
     # content += "<div id='bubble-detail-change-bar2'></div>"
     comment = data.data.comment.replace(/[0-9]+\./gi, (str) -> return "<br />"+str )
     comment = comment.replace(/\([0-9]+\)/gi, (str) -> return "<br />"+str )
@@ -323,7 +323,7 @@ class BubbleChart
     $('#bubble-detail-amount-value').text(UnitMapper.convert data.value,void,false)
     $('#bubble-detail-amount-quantifier').text(UnitMapper.getQuantifier!)
     $('#bubble-detail-amount-unit').text(UnitMapper.getUnit!)
-    # $('#bubble-detail-amount-change').text(change data.change)
+    $('#bubble-detail-amount-change').text(change data.change)
     $('#bubble-detail-amount-alt').text UnitMapper.convert data.value,-1,true
     $('#bubble-detail-link').attr \href, 'http://'+window.location.host+'/budget/'+data.data.code
     $('#bubble-detail-link').text "直接連結"

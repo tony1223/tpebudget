@@ -13,10 +13,12 @@ dataforyear = (year, cb) ->
         .map json
     cb {key: \root, values: json}
 
-dataOverYears = (y2013, y2014) ->
-    for code, entry of y2014
-        entry.byYear = { 2014: +entry.amount, 2013: +y2013[code]?amount }
-        entry.change = (entry.byYear.2014 - entry.byYear.2013) / entry.byYear.2013 if entry.byYear.2013
+dataOverYears = (y1,y2,data1, data2) ->
+    for code, entry of data2
+        entry.byYear = { }
+        entry.byYear[y2] = +entry.amount;
+        entry.byYear[y1] = +data1[code]?amount;
+        entry.change = (entry.byYear[y2] - entry.byYear[y1]) / entry.byYear[y2] if entry.byYear[y2]
         entry.amount = 0 if entry.amount is \NaN
         entry
 
@@ -92,8 +94,8 @@ test_bubble = ->
   #y2013 <- mapforyear 2013
   #y2014 <- mapforyear 2014
   y2015 <- mapforyear 2015
-  y2014 <- mapforyear 2015
-  data = dataOverYears y2014, y2015
+  y2016 <- mapforyear 2016
+  data = dataOverYears 2015,2016,y2015, y2016
   data .= sort (a, b) -> b.amount - a.amount
   #data .= slice 0, 600
   render_vis data
@@ -124,9 +126,9 @@ testd3 = ->
         .style \width  width + \px
         .style \height height + \px
 
-    y2013 <- mapforyear 2013
     y2014 <- mapforyear 2014
-    data = dataOverYears y2013, y2014
+    y2015 <- mapforyear 2015
+    data = dataOverYears 2014,2015,y2014, y2015
     json = d3.nest!
         .key -> it.cat
         .key -> it.depname
