@@ -64,6 +64,10 @@ class BubbleChart
         .attr \fill ~> @fill_color it.change
         .attr \stroke, (d) ~> (d3.rgb @fill_color d.change).darker!
         .style \opacity,1.0 if @lockcell.node
+        
+      if !d && window.history.pushState
+        window.history.pushState(null,document.title,'http://'+window.location.host+'/budget/');        
+
       if !d || d.id==@lockcell.id
         if @mode!='default'
           InfoPanel.setState 2
@@ -324,7 +328,7 @@ class BubbleChart
     content += "<span class='name'>主管單位:</span><span class='value'> #{data.data.depname}/ #{data.data.depcat} </span><br/>"
     content += "<span class='name'>變更:</span><span class='change'> #{change data.change} (#{UnitMapper.convert (data.value - data.data.last_year),void,false})</span><br />"
     content += "<span class='name'>變更細項說明(點擊圓圈可以看詳細說明):</span>"
-    content += "<div style='padding:5px;height:300px;border:1px solid black;border-radio:10px;' class='detail'>#{data.data.comment_html}</div>"
+    content += "<div style='padding:5px;height:300px;overflow:auto;border:1px solid black;border-radio:10px;' class='detail'>#{data.data.comment_html}</div>"
     # content += "<div id='bubble-detail-change-bar2'></div>"
     $('#bubble-detail-change-text').html(data.data.comment_html); 
     $('#bubble-detail-name').text(data.data.name)
