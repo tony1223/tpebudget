@@ -1,4 +1,8 @@
 # Declare app level module which depends on filters, and services
+
+if !String.prototype.endsWith then
+  String.prototype.endsWith = (suffix)  -> this.indexOf(suffix, this.length - suffix.length) !== -1
+
 angular.module \app, <[ partials ngResource app.controllers app.directives app.filters app.services ui.directives ui.state ]>
 
 .config <[$stateProvider $urlRouterProvider $locationProvider]> ++ ($stateProvider, $urlRouterProvider, $locationProvider) ->
