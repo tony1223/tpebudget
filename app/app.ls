@@ -29,7 +29,7 @@ angular.module \app, <[ partials ngResource app.controllers app.directives app.f
       templateUrl: '/partials/profile.html'
 
   $urlRouterProvider
-    .otherwise('/budget')
+    .otherwise('/view3')
 
   $locationProvider.html5Mode true
 

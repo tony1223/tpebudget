@@ -94,11 +94,15 @@
     @include \auth
     @include \opengraph
     @csv2012 = null
-    @loadCsv \app/assets/data/tpe2015ap.csv, (hash) ~> 
+    @loadCsv \app/assets/data/tpe2016ap.csv, (hash) ~> 
       @csv2012 = hash
     getOpenGraph = (code) ~> @getOpenGraph @csv2012,code
     @get '/:what': sendFile \index.html
     @get '/budget/:code': ->
         code = (@request.path.match /\/budget\/(\S+)/)[1]
         @render 'index.static.jade': getOpenGraph code
+    @get '/view3/:dep/:name': ->
+        dep = (@request.path.match /\/view3\/(\S+)/)[1]
+        name = (@request.path.match /\/view3\/(\S+)\/(\S+)/)[2]
+        @render 'index.static.jade': {dep,name}
       #sendFile \index.html
