@@ -12,7 +12,7 @@ mapforyear = (year, cb) ->
     for key,value of json
         value.amount = parseInt value.amount,10
         if value.comment
-            value.comment_html = "<div style='line-height:150%;font-size:18px;'>"+value.comment+"</div>"
+            value.comment_html = "<div style='line-height:150%;font-size:16px;'>"+value.comment+"</div>"
             value.comment_html = value.comment_html.replace(/[0-9]+\./gi, (str) -> return "<br /><br />"+str )
             value.comment_html = value.comment_html.replace(/\([0-9]+\)/gi, (str) -> return "<br /><br />&nbsp;&nbsp;&nbsp;"+str )
             value.comment_html = value.comment_html.replace(/增列/gi, (str) -> return "<span style='color:green;'>"+str+"</span>" )

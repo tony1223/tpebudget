@@ -27,12 +27,12 @@ UnitMapper =
 
     if des_unit==-1 then des_unit=parseInt Math.random()*this.table.length
     des_unit ?= this.unit
-    unitdata=this.table[des_unit]
-    value=parseInt(10000*value/unitdata[2])/10000
-    value = if value>=1000000000000 then this._num(value,1000000000000,2)+"兆"
-            else if value>=100000000 then this._num(value,100000000,2)+"億"
-            else if value>=10000 then parseInt(value/10000)+"萬"
-            else if value>=1000 then parseInt(value/1000)+"千"
+    unitdata=this.table[des_unit] || ["","元",1] ;
+    value=parseInt(10000*value/ unitdata[2])/10000
+    value = if value>=1000000000000 then this._num(value,1000000000000,2)+" 兆"
+            else if value>=100000000 then this._num(value,100000000,2)+" 億"
+            else if value>=10000 then parseInt(value/10000)+" 萬"
+            else if value>=1000 then parseInt(value/1000)+" 千"
             else if value>=1 then parseInt(10*value)/10
             else value
     return prefix + value + if full_desc then unitdata[0]+unitdata[1] else ""
