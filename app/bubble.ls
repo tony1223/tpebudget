@@ -109,8 +109,8 @@ class BubbleChart
       .attr \class -> \bubble-budget
       .attr \r -> it.radius
       .attr \fill ~> @fill_color it.change
-      .attr \stroke-width, 2
-      .attr \stroke ~> d3.rgb(@fill_color(it.change))darker!
+      .attr \stroke-width, -> 2
+      .attr \stroke ~>  if it.data.name =="行政管理" then 'red' else d3.rgb(@fill_color(it.change))darker! 
       .attr \id -> "bubble_#{it.id}"
       .on \mousemove (d,i) ~> if !@lockcell.node then @show_details d, i, d3.event.target
       .on \mouseover (d,i) ~>
@@ -353,7 +353,8 @@ class BubbleChart
     @do_show_details data,(if element then @mode else 'default') if @do_show_details
     if !element then @tooltip.hideTooltip!
   hide_details: (data, i, element) ->
-    (d3.select element).attr 'stroke', (d) ~> (d3.rgb @fill_color d.change).darker!
+    (d3.select element).attr 'stroke', (d) ~> if d.data.name =="行政管理" then 'red' else d3.rgb(@fill_color(d.change))darker! 
     @tooltip.hideTooltip!
+
 
 root = exports ? this

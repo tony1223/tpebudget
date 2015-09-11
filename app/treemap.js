@@ -284,7 +284,10 @@ function initTreeMap() {
             }            
             return (kx * d.dx / 2 ) < 20 ?"left":"middle"; 
           })
-          .attr("y", function(d) { return ky * d.dy / 2 + 7; });
+          .attr("y", function(d) { 
+            return ky * d.dy / 2 + 7; 
+          });
+
       svg.selectAll("g.texts")
       .transition().style("display", function(d) { return textSize(d,this,["block",$(this).css("display")]);  })
       .transition().duration(250).style("opacity", function(d) { 
@@ -305,8 +308,10 @@ function initTreeMap() {
     var unit_selector;
     var budget_unit=0;
     function textSize(d,item, values) {
-      // console.log("textsize",arguments);
-        if(kx*d.dx+5 > item.childNodes[0].getComputedTextLength()
+      if(d.cat == "社會局主管"){
+        return values[0];
+      }
+        if(kx*d.dx+5 > item.childNodes[0].getComputedTextLength() 
          && kx*d.dx+5 > item.childNodes[1].getComputedTextLength()
          && ky*d.dy>20) return values[0];
         else return values[1];

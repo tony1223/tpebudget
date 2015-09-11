@@ -16,7 +16,7 @@ function reorg(node, child) {
   var i,n;
   node.children = [];
   for(i in child) {
-    n = {"name": i, "size": child[i]["value"], "cat": child[i]["cat"]};
+    n = {"name":  i , "size": child[i]["value"], "cat": child[i]["cat"]};
     if(child[i]["childhash"]) reorg(n, child[i].childhash);
     node.children.push(n);
   }
