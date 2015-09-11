@@ -272,7 +272,7 @@ function initTreeMap() {
             if(isRoot){
               return "middle";
             }
-            return (kx * d.dx / 2 ) < 20?"left":"middle"; 
+            return (kx * d.dx / 2 ) < 30?"left":"middle"; 
           })
           .attr("y", function(d) { return ky * d.dy / 2 - 7; });
 
@@ -282,7 +282,7 @@ function initTreeMap() {
             if(isRoot){
               return "middle";
             }            
-            return (kx * d.dx / 2 ) < 20 ?"left":"middle"; 
+            return (kx * d.dx / 2 ) < 30 ?"left":"middle"; 
           })
           .attr("y", function(d) { 
             return ky * d.dy / 2 + 7; 

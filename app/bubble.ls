@@ -56,7 +56,7 @@ class BubbleChart
             .attr \y 15
             .attr \text-anchor \right
             .text -> match it
-            | isNaN     => '新增'
+            | isNaN     => '刪除'
             | (== -1)   => ''       # XXX: match -1 does not work
             | otherwise => change it
     @locking = (d,i,node) ~>
