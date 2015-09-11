@@ -82,8 +82,9 @@ mod.BudgetItem = <[ $scope $state BudgetItem ]> ++ ($scope, $state, BudgetItem) 
         $scope <<< res{nlikes,nhates,ncuts,nconfuses,tags}
 
     $scope.$watch \key ->
-        res <- BudgetItem.get $scope.key
-        update_from_item res
+        if $scope.key
+          res <- BudgetItem.get $scope.key
+          update_from_item res
     $scope <<< do
         nlikes: '???'
         nconfuses: '???'
