@@ -200,7 +200,7 @@ function initTreeMap() {
             UnitMapper.convert(d.amount, null, true),"</td>",
             "<td> ", 
               "<span style='color:",(d.change == 0 ? "black" :d.change > 0 ? "red" :"green"),"'>",
-              (d.change > 0 ? "+" :"") , parseInt(d.change *100 * 100,10)/100 ,"%",
+              d.amount && [(d.change > 0 ? "+" :"") , parseInt(d.change *100 * 100,10)/100 ,"%"].join("") ,
               "<br /> (約差 ",
               UnitMapper.convert(d.amount - d.last_year, null, true),")</td>",
             "<td><button  onclick=\"$('#info-",domID,
