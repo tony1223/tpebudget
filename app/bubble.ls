@@ -177,7 +177,7 @@ class BubbleChart
     @vis.selectAll(\.attr-legend)remove!
     @force.gravity @layout_gravity
       .charge @charge
-      .friction 0.7
+      .friction 0.8
       .on \tick (e) ~>
         @circles.each @move_towards_center e.alpha
           .attr \cx -> it.x
@@ -188,10 +188,12 @@ class BubbleChart
 
   move_towards_center: (alpha) ->
     (d) ~>
+
       cy = (@change_scale d.change) ? @center.y
       cy = @center.y if isNaN cy
-      d.x += (@center.x - d.x) * (@damper + 0.02) * alpha
-      d.y += (cy - d.y) * (@damper + 0.02) * alpha
+      if d.change < 0 then cy += 15 else cy -= 15
+      d.x += (@center.x - d.x + 5 ) * (@damper + 0.02) * alpha
+      d.y += (cy - d.y + 5 ) * (@damper + 0.02) * alpha
 
 
   display_by_attr: (attr) ->
@@ -233,9 +235,10 @@ class BubbleChart
 
     group_relocate = (d, des, sparse) ~>
       if des.key==d.data[attr]
-        if sparse
-          d.des_x = des.x+Math.random!*80-40
-          d.des_y = des.y+Math.random!*80-40
+        if sparse 
+          d.des_x = des.x+Math.random!*100 - 40
+          d.des_y = des.y+Math.random!*50 - 40
+          if d.change > 0 then d.des_y -= 0 else d.des_y +=50 
         else
           d.des_x = des.x+Math.random!*10-5
           d.des_y = des.y+Math.random!*10-5
@@ -280,7 +283,7 @@ class BubbleChart
       (d) ~>
         {x,y,r} = centers[ d.data[attr] ]
         factor = (@damper + 0.22 + 1.0*(100-(r <? 100))/130) * alpha * 0.9
-        d.x += ((d.des_x ?= x) - d.x) * factor
+        d.x += ((d.des_x ?= x) - d.x) * factor 
         d.y += ((d.des_y ?= y) - d.y) * factor
     @force.gravity @layout_gravity
       .charge @charge
