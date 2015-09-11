@@ -202,9 +202,9 @@ function initTreeMap() {
           if( cell && !(cell.cat == d.topname || cell.name == d.topname) ){
             continue;
           }
-          if( cell &&  cell.cat  && d.depname != cell.name){
-            continue;
-          }
+          // if( cell &&  cell.cat  && d.depname != cell.name){
+            // continue;
+          // }
           var domID = d.code.replace(/\./gi,"-");
           out.push("<tr><td>",d.year,"</td><td>",
             d.code.split("-")[1],"</td><td>",
