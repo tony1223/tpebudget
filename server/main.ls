@@ -69,7 +69,8 @@
     @post '/1/budgetitems/:key/:what': ->
         key = @params.key
         done = (err, item) ~>
-            console.log item
+            if !item 
+                @response.send null
             if @params.what in <[likes confuses hates cuts]>
                 console.log item._id
                 user_id = @request.user?_id ? @request.ip
