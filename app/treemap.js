@@ -108,7 +108,7 @@ function initTreeMap() {
          scope.$apply(function() { scope.key="view3:"+d.cat+":"+d.name; });
        } else { lockcell=null; }
        if(node!=d.parent) {
-         $("#treemap-backbtn").fadeIn("slow");
+         $("#treemap-backbtn").show();
          return zoom(d.parent);
        } 
     }    
@@ -161,7 +161,7 @@ function initTreeMap() {
           .text(function(d) { return CurrencyConvert(d.size, budget_unit, true); });
       texts.style("display", function(d) { return textSize(d,this,["block","none"]); });
 
-      d3.select("#treemap-backbtn").on("click",function() { zoom(root); $("#treemap-backbtn").fadeOut("slow"); });
+      d3.select("#treemap-backbtn").on("click",function() { zoom(root); $("#treemap-backbtn").hide(); });
     };
     function size(d) {
       return d.size;
@@ -287,10 +287,10 @@ function initTreeMap() {
           .attr("y", function(d) { return ky * d.dy / 2 + 7; });
       svg.selectAll("g.texts")
       .transition().style("display", function(d) { return textSize(d,this,["block",$(this).css("display")]);  })
-      .transition().duration(750).style("opacity", function(d) { 
+      .transition().duration(250).style("opacity", function(d) { 
         return textSize(d,this,[1,1]); 
       })
-      .transition().delay(750).style("display", function(d) { 
+      .transition().delay(250).style("display", function(d) { 
         if(!isRoot){
           return "block";
         }
