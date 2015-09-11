@@ -5,7 +5,7 @@ refine_amount = (str) ->
         return " <b >" + str.substring(0,str.length-1)+" 元" + 
             ( " (約"+ UnitMapper.convert(amount,void,false)+") </b> " )   
     else
-        return " <b >" + str.substring(0,str.length-1)+" 元" 
+        return " <b >" + str.substring(0,str.length-1)+" 元 </b>" 
 
 mapforyear = (year, cb) ->
     json <- d3.csv "/data/tpe#{year}ap.csv"
