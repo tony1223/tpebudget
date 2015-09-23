@@ -1,6 +1,10 @@
 
 refine_amount = (str) ->
-    amount = parseInt(str.replace(/[,元]/gi,""),10)
+    amount = parseInt(str.replace(/[,千元]/gi,""),10);
+    if(str.indexOf("千元") != -1){
+        amount = amount * 1000;
+    }
+
     if amount > 1000000 
         return " <b >" + str.substring(0,str.length-1)+" 元" + 
             ( " (約"+ UnitMapper.convert(amount,void,false)+") </b> " )   
@@ -17,7 +21,7 @@ mapforyear = (year, cb) ->
             value.comment_html = value.comment_html.replace(/\([0-9]+\)/gi, (str) -> return "<br /><br />&nbsp;&nbsp;&nbsp;"+str )
             value.comment_html = value.comment_html.replace(/增列/gi, (str) -> return "<span style='color:green;'>"+str+"</span>" )
             value.comment_html = value.comment_html.replace(/減列/gi, (str) -> return "<span style='color:red;'>"+str+"</span>" )
-            value.comment_html = value.comment_html.replace(/[0-9,]+元/gi, refine_amount)
+            value.comment_html = value.comment_html.replace(/[0-9,]+[千]元/gi, refine_amount)
             value.comment_html = value.comment_html.replace(/上年度預算數/gi, (str) -> return "<b>"+str+"</b>" );
     cb {[code, entry] for {code}:entry in json}
 
