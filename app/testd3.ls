@@ -1,9 +1,10 @@
 
 refine_amount = (str) ->
     amount = parseInt(str.replace(/[,千元]/gi,""),10);
-    if(str.indexOf("千元") != -1){
+    
+    if str.indexOf("千元") != -1
         amount = amount * 1000;
-    }
+    
 
     if amount > 1000000 
         return " <b >" + str.substring(0,str.length-1)+" 元" + 
