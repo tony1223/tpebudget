@@ -8,7 +8,7 @@ refine_amount = (str) ->
         return " <b >" + str.substring(0,str.length-1)+" 元 </b>" 
 
 mapforyear = (year, cb) ->
-    json <- d3.csv "http://tony1223.github.io/tpe-2016-budget/output/data/tpe#{year}ap.csv"
+    json <- d3.csv "http://tony1223.github.io/ks-budget-convert/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v_{year}.csv"
     for key,value of json
         value.amount = parseInt value.amount,10
         if value.comment
@@ -21,13 +21,13 @@ mapforyear = (year, cb) ->
             value.comment_html = value.comment_html.replace(/上年度預算數/gi, (str) -> return "<b>"+str+"</b>" );
     cb {[code, entry] for {code}:entry in json}
 
-dataforyear = (year, cb) ->
-    json <- d3.csv "/data/tw#{year}ap.csv"
-    json = d3.nest!
-        .key -> it.cat
-        .key -> it.depname
-        .map json
-    cb {key: \root, values: json}
+# dataforyear = (year, cb) ->
+#     json <- d3.csv "/data/tw#{year}ap.csv"
+#     json = d3.nest!
+#         .key -> it.cat
+#         .key -> it.depname
+#         .map json
+#     cb {key: \root, values: json}
 
 dataOverYears = (y1,y2,data1, data2) ->
     for code, entry of data2

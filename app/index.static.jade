@@ -14,11 +14,11 @@ html(lang='en',prefix="og: http://ogp.me/ns#")
       meta(property='og:type',content='website')
       meta(property='og:image',content='http://tpebudget.tonyq.org/img/ogimage.png')
       meta(property='og:description',content='#{locals.og_description}')
-      title 台北市 2016 總預算 #{locals.og_title}
+      title 高雄市 2016 總預算視覺化 #{locals.og_title}
     else
       meta(property='og:type',content='website')
       meta(property='og:image',content='http://tpebudget.tonyq.org/img/ogimage.png')
-      title 台北市 2016 總預算
+      title 高雄市 2016 總預算視覺化
 
     link(rel='stylesheet', href='/css/app.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Cousine:700italic',type='text/css')
@@ -58,7 +58,7 @@ html(lang='en',prefix="og: http://ogp.me/ns#")
               //- img(src="/img/logo.png",alt="Logo: G0V.tw")
               //- span / 中央政府總預算
               a(href="/") 
-                span 台北市 2016 預算
+                span 高雄市 2016 預算視覺化
             .nav-collapse
               div(ng-include="'/partials/nav.html'")
       .container.main-content
@@ -72,8 +72,5 @@ html(lang='en',prefix="og: http://ogp.me/ns#")
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-67262972-1', 'auto');
+      ga('create', 'UA-67262972-2', 'auto');
       ga('send', 'pageview');
-      
-      ga('create', 'UA-67265163-1', 'auto', {'name': 'newTracker'});
-      ga('newTracker.send', 'pageview');
