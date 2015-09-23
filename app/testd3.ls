@@ -1,16 +1,16 @@
 
 refine_amount = (str) ->
     amount = parseInt(str.replace(/[,千元]/gi,""),10);
-    
+
     if str.indexOf("千元") != -1
         amount = amount * 1000;
     
 
     if amount > 1000000 
-        return " <b >" + str.substring(0,str.length-1)+" 元" + 
+        return " <b >" + str + 
             ( " (約"+ UnitMapper.convert(amount,void,false)+") </b> " )   
     else
-        return " <b >" + str.substring(0,str.length-1)+" 元 </b>" 
+        return " <b >" + str+" </b>" 
 
 mapforyear = (year, cb) ->
     json <- d3.csv "http://tony1223.github.io/ks-budget-convert/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v_#{year}.csv"
@@ -22,7 +22,7 @@ mapforyear = (year, cb) ->
             value.comment_html = value.comment_html.replace(/\([0-9]+\)/gi, (str) -> return "<br /><br />&nbsp;&nbsp;&nbsp;"+str )
             value.comment_html = value.comment_html.replace(/增列/gi, (str) -> return "<span style='color:green;'>"+str+"</span>" )
             value.comment_html = value.comment_html.replace(/減列/gi, (str) -> return "<span style='color:red;'>"+str+"</span>" )
-            value.comment_html = value.comment_html.replace(/[0-9,]+[千]元/gi, refine_amount)
+            value.comment_html = value.comment_html.replace(/[0-9,]+[ ]?[千]元/gi, refine_amount)
             value.comment_html = value.comment_html.replace(/上年度預算數/gi, (str) -> return "<b>"+str+"</b>" );
     cb {[code, entry] for {code}:entry in json}
 
