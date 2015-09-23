@@ -1,5 +1,5 @@
-# tpe-budget-2016
-### visualizing taipei 2016 spending
+# ks-budget-2016
+### visualizing kaohsiung 2016 spending
 
 ## Prerequisites
 
@@ -42,4 +42,4 @@ MIT http://g0v.mit-license.org/
 
 ## source
 
-Fork from https://github.com/g0v/twbudget
+Fork from https://github.com/g0v/twbudget by TonyQ
