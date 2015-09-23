@@ -8,7 +8,7 @@ refine_amount = (str) ->
         return " <b >" + str.substring(0,str.length-1)+" 元 </b>" 
 
 mapforyear = (year, cb) ->
-    json <- d3.csv "http://tony1223.github.io/ks-budget-convert/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v_{year}.csv"
+    json <- d3.csv "http://tony1223.github.io/ks-budget-convert/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v_#{year}.csv"
     for key,value of json
         value.amount = parseInt value.amount,10
         if value.comment

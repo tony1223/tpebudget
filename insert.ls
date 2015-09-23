@@ -3,7 +3,7 @@ Q = require \q
 json = try JSON.parse do
     require \fs .readFileSync \environment.json \utf8
 mongoose = require \mongoose
-mongoose.connect json?MONGOLAB_URI ? process.env?MONGOLAB_URI ? \mongodb://localhost/ydh
+mongoose.connect json?MONGOLAB_URI ? process.env?MONGOLAB_URI ? \mongodb://localhost/ks-ydh
 
 p = new Product do
     name: "ONE X"

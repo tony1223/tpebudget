@@ -17,16 +17,17 @@
     "start": "node server/app.js"
   },
   "dependencies": {
-    "zappajs": "0.4.x",
-    "mongoose": "3.2.x",
-    "passport": "0.1.x",
     "bcrypt": "0.7.x",
     "cookie-sessions": "git://github.com/clkao/cookie-sessions.git",
-    "passport-local": "0.1.x",
+    "jade": "0.27.x",
+    "mongoose": "3.2.x",
+    "passport": "0.1.x",
     "passport-facebook": "0.1.x",
     "passport-github": "0.1.x",
+    "passport-local": "0.1.x",
     "passport-twitter": "0.1.x",
-    "jade": "0.27.x"
+    "request": "^2.63.0",
+    "zappajs": "0.4.x"
   },
   "devDependencies": {
     "LiveScript": "1.1.1",

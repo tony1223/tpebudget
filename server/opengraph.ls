@@ -1,11 +1,11 @@
 @include = ->
   fs = require \fs
+  request = require \request
 
   CurrencyData = [
     ["", "元", 1],
     ["份","營養午餐",25],
     ["人的","年薪",308000],
-    ["座","釣魚台",80000000],
     ["分鐘","太空旅遊",1000000],
     ["碗","鬍鬚張魯肉飯",68],
     ["個","便當",50],
@@ -13,7 +13,6 @@
     ["份","雞排加珍奶",60],
     ["個","夢想家",200000000],
     ["座","冰島",2000080000000],
-    ["坪","帝寶",2500000],
     ["次","北市重陽敬老禮金",770000000],
     ["支","iPhone5",25900],
   ];
@@ -33,7 +32,8 @@
     v + (if full then c[0] + c[1] else "")
   
   @loadCsv = (fn, cb) ->
-    fs.readFile fn, \utf8, (err,data) ->
+    request fn, (err,data) ->
+      data = data.toString()
       hash = {}
       if err then return console.log err
       arr = data.split '\n' .filter (e,i,a) ->

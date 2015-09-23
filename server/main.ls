@@ -95,7 +95,7 @@
     @include \auth
     @include \opengraph
     @csv2012 = null
-    @loadCsv \app/assets/data/tpe2016ap.csv, (hash) ~> 
+    @loadCsv \http://tony1223.github.io/ks-budget-convert/output/%E6%AD%B2%E5%87%BA%E6%A9%9F%E9%97%9C%E5%88%A5%E9%A0%90%E7%AE%97%E8%A1%A8_g0v_2016.csv, (hash) ~> 
       @csv2012 = hash
     getOpenGraph = (code) ~> @getOpenGraph @csv2012,code
     @get '/:what': sendFile \index.html
